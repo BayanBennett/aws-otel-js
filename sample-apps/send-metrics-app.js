@@ -5,11 +5,12 @@
 const { CollectorMetricExporter } = require('@opentelemetry/exporter-collector-grpc');
 const { MeterProvider } = require('@opentelemetry/metrics');
 const { Resource } = require('@opentelemetry/resources');
+const { SemanticResourceAttributes } = require('@opentelemetry/semantic-conventions');
 
 /** The OTLP Metrics Provider with OTLP gRPC Metric Exporter and Metrics collection Interval  */
 const meter = new MeterProvider({
   resource: Resource.default().merge(new Resource({
-    [ResourceAttributes.SERVICE_NAME]: "aws-otel-js-sample"
+    [SemanticResourceAttributes.SERVICE_NAME]: "aws-otel-js-sample"
   })),
   // Expects Collector at env variable `OTEL_EXPORTER_OTLP_ENDPOINT`, otherwise, http://localhost:4317
   exporter: new CollectorMetricExporter(),
